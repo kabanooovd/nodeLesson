@@ -8,7 +8,7 @@ const printError = (error) => {
 	console.log(`${bgRed(" Error ")} :  ${error}`);
 };
 
-const printSuccess = () => {
+const printSuccess = (message) => {
 	console.log(`${bgGreen(" SUCCESS ")} :  ${message}`);
 };
 
