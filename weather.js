@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import {getArgs} from "./helpers/args.js"
-import { getWeather } from "./services/api.service.js";
-import { printError, printHelp, printSuccess } from "./services/log.service.js";
+import { getWeather, getIcon } from "./services/api.service.js";
+import { printError, printHelp, printSuccess, printWeather } from "./services/log.service.js";
 import { saveKeyValue, TOKEN_DICTIONARY } from "./services/storage.service.js";
 
 const saveToken = async (token) => {
@@ -16,10 +16,23 @@ const saveToken = async (token) => {
     }
 }
 
+const saveCity = async (city) => {
+    if (!city.length) {
+        printError("No city transmitted...")
+        return
+    }
+    try {
+        await saveKeyValue(TOKEN_DICTIONARY.city, city)
+    } catch(err) {
+        printError(err.message)
+    }
+}
+
 const getForcast = async () => {
     try {
         const weather = await getWeather("moscow")
-        console.log(weather)
+        // console.log(weather)
+        printWeather(weather, getIcon(weather.weather[0].icon))
     } catch(err) {
         if (err?.response?.status == 404) {
             printError("Wrong city")
@@ -35,14 +48,15 @@ const getForcast = async () => {
 const initCli = () => {
     const args = getArgs(process.argv)
     if (args.h) {
-        printHelp();
+        return printHelp();
     } 
     if (args.s) {
+        return saveCity(args.s)
     } 
     if (args.t) {
         return saveToken(args.t)
     } 
-    getForcast()
+    return getForcast()
 };
 
 initCli();

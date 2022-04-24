@@ -1,5 +1,5 @@
 {
-	"name": "lesson-weather-cli-by-dimasss",
+	"name": "lesson-weather-cli-by-dimasss-karabassss",
 	"version": "1.0.0",
 	"description": "Lesson node js",
 	"main": "weather.js",
@@ -8,7 +8,7 @@
 		"weather": "weather.js"
 	},
 	"scripts": {
-		"start": "node index.js",
+		"start": "node weather.js",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"keywords": [
@@ -20,10 +20,10 @@
 	"homepage": "https://my-website.com",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com"
+		"url": "https://github.com/kabanooovd/nodeLesson.git"
 	},
 	"bugs": {
-		"url": "https://github.com",
+		"url": "https://github.com/kabanooovd/nodeLesson.git",
 		"email": "kabanooovd@yandex.ru"
 	},
 	"dependencies": {
