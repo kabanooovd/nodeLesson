@@ -3,7 +3,7 @@ import axios from "axios";
 import { getKeyValue, TOKEN_DICTIONARY } from "./storage.service.js";
 
 const getWeather = async (city) => {
-	const token = await getKeyValue(TOKEN_DICTIONARY.token);
+	const token = process.env.TOKEN ?? await getKeyValue(TOKEN_DICTIONARY.token);
 	if (!token) {
 		throw new Error("token is undefined, use -> -t API_KEY");
 	}
@@ -16,7 +16,6 @@ const getWeather = async (city) => {
             units: "metric",
         }
     })
-
     return data;
 
 	// const url = new URL(`https://api.openweathermap.org/data/2.5/weather`);
