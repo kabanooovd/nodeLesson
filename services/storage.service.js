@@ -5,6 +5,11 @@ import { printSuccess, printError } from "./log.service.js";
 
 const filePath = join(homedir(), "weather-data.json");
 
+const TOKEN_DICTIONARY = {
+    token: "token",
+    city: "city",
+}
+
 const saveKeyValue = async (key, value) => {
 	let data = {};
     try {
@@ -22,8 +27,9 @@ const saveKeyValue = async (key, value) => {
 };
 
 const getKeyValue = async (key) => {
+	let data = {};
 	if (await isExist(filePath)) {
-		const file = promises.readFile(filePath);
+		const file = await promises.readFile(filePath);
 		data = JSON.parse(file);
 		return data[key];
 	} else {
@@ -41,7 +47,7 @@ const isExist = async (path) => {
 	}
 };
 
-export { saveKeyValue, getKeyValue };
+export { saveKeyValue, getKeyValue, TOKEN_DICTIONARY };
 
 // const saveKeyValue = (key, value) => {
 //     console.log(dirname(filePath))

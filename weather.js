@@ -1,11 +1,16 @@
 #!/usr/bin/env node
 import {getArgs} from "./helpers/args.js"
+import { getWeather } from "./services/api.service.js";
 import { printError, printHelp, printSuccess } from "./services/log.service.js";
-import { saveKeyValue } from "./services/storage.service.js";
+import { saveKeyValue, TOKEN_DICTIONARY } from "./services/storage.service.js";
 
 const saveToken = async (token) => {
+    if (!token.length) {
+        printError("No token transmitted...")
+        return
+    }
     try {
-        await saveKeyValue("token", token)
+        await saveKeyValue(TOKEN_DICTIONARY.token, token)
     } catch(err) {
         printError(err.message)
     }
@@ -17,13 +22,13 @@ const initCli = () => {
         printHelp();
     } 
     if (args.s) {
-        // save city
     } 
     if (args.t) {
-        // saveKeyValue("token", args.t)
         return saveToken(args.t)
     } 
-    // for example return weather
+    getWeather("moscow")
 };
 
 initCli();
+
+// 4498af52cae6d0ab12026d1746e60ed5
